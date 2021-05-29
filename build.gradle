@@ -1,0 +1,28 @@
+plugins {
+    id 'java'
+    id("org.gradle.test-retry") version "1.2.1"
+}
+
+tasks.test {
+    retry {
+        failOnPassedAfterRetry.set(true)
+        maxFailures.set(2)
+        maxRetries.set(3)
+    }
+}
+
+group 'org.example'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation group: 'org.seleniumhq.selenium', name: 'selenium-java', version: '3.141.59'
+    implementation group: 'org.testng', name: 'testng', version: '7.4.0'
+}
+
+test {
+    useTestNG()
+}
